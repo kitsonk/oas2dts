@@ -1,0 +1,85 @@
+{
+  "name": "oas2dts",
+  "version": "0.0.1",
+  "description": "An Open API (Swagger) TypeScript definition generator",
+  "main": "index.js",
+  "bin": {
+    "oas2dts": "./index.js"
+  },
+  "scripts": {
+    "build:lib": "tsc -p tsconfig.lib.json",
+    "build:test": "tsc -p tsconfig.tests.json",
+    "clean": "rimraf output lib",
+    "copy": "cpx \"{src,tests}/**/*.{js,html,css,json}\" output & cpx package.json output",
+    "precommit": "lint-staged",
+    "prepare": "npm-run-all build:lib",
+    "test": "npm-run-all clean build:test copy test:intern",
+    "test:intern": "intern"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitsonk/oas2dts.git"
+  },
+  "keywords": [
+    "swagger",
+    "openapi",
+    "typescript",
+    "generator"
+  ],
+  "author": "Kitson Kelly <me@kitsonkelly.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kitsonk/oas2dts/issues"
+  },
+  "homepage": "https://github.com/kitsonk/oas2dts#readme",
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "minimatch": "^3.0.4",
+    "swagger-parser": "^5.0.0",
+    "ts-simple-ast": "^11.2.1",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.3",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "^8.9.0",
+    "@types/sinon": "^5.0.0",
+    "@types/sinon-chai": "^2.7.32",
+    "@types/swagger-parser": "^4.0.2",
+    "@types/swagger-schema-official": "^2.0.9",
+    "@types/yargs": "^11.0.0",
+    "chai-as-promised": "^7.1.1",
+    "cpx": "^1.5.0",
+    "husky": "0.14.3",
+    "intern": "^4.2.0",
+    "lint-staged": "^7.1.2",
+    "npm-run-all": "4.1.3",
+    "prettier": "^1.13.0",
+    "rimraf": "^2.6.2",
+    "sinon": "^5.0.10",
+    "sinon-chai": "^3.1.0",
+    "ts-node": "^6.0.5",
+    "tslib": "^1.9.2",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": true,
+    "parser": "typescript",
+    "printWidth": 120,
+    "arrowParens": "always"
+  }
+}
